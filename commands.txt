@@ -1,0 +1,4 @@
+cf login -a https://api.bosh-lite.com --skip-ssl-validation -u admin -p $(bosh interpolate deployments/vbox/deployment-vars.yml --path /cf_admin_password)
+
+
+uaac target https://192.168.50.6:8443 --skip-ssl-validation
