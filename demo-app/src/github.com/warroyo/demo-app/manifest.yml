@@ -3,5 +3,7 @@ applications:
 - name: demo-app
   domain: team1.development.bosh-lite.com
   memory: 64M
-  instances: 1
+  instances: 4
+  env:
+    GOPACKAGENAME: demo-app
   command: demo-app

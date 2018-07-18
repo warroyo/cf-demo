@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
@@ -20,6 +21,7 @@ func main() {
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 	http.HandleFunc("/", serveTemplate)
+	http.HandleFunc("/version", version)
 
 	var port string
 	if port = os.Getenv("PORT"); len(port) == 0 {
@@ -56,4 +58,18 @@ func serveTemplate(w http.ResponseWriter, r *http.Request) {
 		log.Println(err.Error())
 		http.Error(w, http.StatusText(500), 500)
 	}
+}
+
+func version(w http.ResponseWriter, r *http.Request) {
+	appEnv, _ := cfenv.Current()
+	var data struct {
+		Name     string
+		Instance int
+	}
+
+	data.Name = appEnv.Name
+	data.Instance = appEnv.Index
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(data)
 }
