@@ -65,10 +65,13 @@ func version(w http.ResponseWriter, r *http.Request) {
 	var data struct {
 		Name     string
 		Instance int
+		Version  string
 	}
+	version := os.Getenv("VERSION")
 
 	data.Name = appEnv.Name
 	data.Instance = appEnv.Index
+	data.Version = version
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(data)
