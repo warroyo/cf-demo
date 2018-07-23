@@ -37,12 +37,13 @@ bosh create-env $base/bosh-deployment/bosh.yml \
   -v internal_cidr=192.168.50.0/24 \
   -v outbound_network_name=NatNetwork
 
-bosh alias-env vbox -e 192.168.50.6 --ca-cert <(bosh int ./creds.yml --path /director_ssl/ca)
 
 sudo route add -net 10.244.0.0/16     192.168.50.6
 cd ../../
 
 source setvars.sh
+bosh alias-env vbox -e 192.168.50.6 --ca-cert <(bosh int ./creds.yml --path /director_ssl/ca)
+
 bosh -e vbox update-cloud-config cf-deployment/iaas-support/bosh-lite/cloud-config.yml
 
 export IAAS_INFO=warden-boshlite

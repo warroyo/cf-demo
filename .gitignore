@@ -3,3 +3,5 @@ deployments
 bosh-deployment
 demo-app/pkg
 vendor
+cf-redis-release
+cf-mysql-deployment
