@@ -34,14 +34,10 @@ func main() {
 }
 
 func serveTemplate(w http.ResponseWriter, r *http.Request) {
-	requests++
-	appEnv, _ := cfenv.Current()
 	var variables struct {
-		Requests int
-		AppEnv   *cfenv.App
+		Version string
 	}
-	variables.AppEnv = appEnv
-	variables.Requests = requests
+	variables.Version = os.Getenv("VERSION")
 	log.Println("rendering content")
 	lp := filepath.Join("templates", "index.html")
 

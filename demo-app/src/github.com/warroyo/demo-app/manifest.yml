@@ -1,9 +1,0 @@
-name: demo-app
-domain: team1.development.bosh-lite.com
-memory: 64M
-instances: 4
-host: demo-app
-env:
-  GOPACKAGENAME: demo-app
-  VERSION: 1.0.0
-command: demo-app

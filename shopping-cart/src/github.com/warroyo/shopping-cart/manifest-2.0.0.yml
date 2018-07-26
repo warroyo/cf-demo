@@ -1,0 +1,7 @@
+domain: production.bosh-lite.com
+memory: 64M
+host: shopping-cart
+env:
+  GOPACKAGENAME: shopping-cart
+  VERSION: 2.0.0
+command: shopping-cart
